@@ -1,0 +1,7 @@
+node_modules
+# Node modules
+frontend/node_modules/
+server/node_modules
+src/node_modules/
+.env
+.env.development
