@@ -1,11 +1,23 @@
 const express = require('express')
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors');
 
 const app = express()
 const port = process.env.PORT || 3001
 
 const btcOrderbook = require('./data/btc_orderbook.json');
 const ethOrderbook = require('./data/eth_orderbook.json');
+
+// ===== CORS FIX =====
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://nascent-frontend-test-v1.vercel.app"  // your Vercel frontend
+  ],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+}));
+
 
 app.use(express.json());
 
@@ -77,6 +89,6 @@ app.post('/trade/', (req, res) => {
     })
 })
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Mock server listening on port ${port}`)
 })
